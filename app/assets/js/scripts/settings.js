@@ -1,6 +1,7 @@
 // Requirements
 const os     = require('os')
 const semver = require('semver')
+const SETTINGS_BRAND = require('./assets/js/brand')
 
 const DropinModUtil  = require('./assets/js/dropinmodutil')
 const { MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR } = require('./assets/js/ipcconstants')
@@ -363,7 +364,6 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGIN, (_, ...arguments_) => {
     if (arguments_[0] === MSFT_REPLY_TYPE.ERROR) {
 
         const viewOnClose = arguments_[2]
-        console.log(arguments_)
         switchView(getCurrentView(), viewOnClose, 500, 500, () => {
 
             if(arguments_[1] === MSFT_ERROR.NOT_FINISHED) {
@@ -394,10 +394,7 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGIN, (_, ...arguments_) => {
                 // This is probably if you messed up the app registration with Azure.      
                 let error = queryMap.error // Error might be 'access_denied' ?
                 let errorDesc = queryMap.error_description
-                console.log('Error getting authCode, is Azure application registered correctly?')
-                console.log(error)
-                console.log(errorDesc)
-                console.log('Full query map: ', queryMap)
+                msftLoginLogger.warn(`Microsoft OAuth returned error: ${error}`)
                 setOverlayContent(
                     error,
                     errorDesc,
@@ -1452,8 +1449,14 @@ function populateAboutVersionInformation(){
  * of the current version. This value is displayed on the UI.
  */
 function populateReleaseNotes(){
+    if(!SETTINGS_BRAND.updateRepository) {
+        settingsAboutChangelogTitle.innerHTML = 'AVALON Launcher v' + remote.app.getVersion()
+        settingsAboutChangelogText.innerHTML = 'Development build. Release notes will appear after the AVALON update repository is configured.'
+        settingsAboutChangelogButton.style.display = 'none'
+        return
+    }
     $.ajax({
-        url: 'https://github.com/dscalzi/HeliosLauncher/releases.atom',
+        url: `${SETTINGS_BRAND.updateRepository}/releases.atom`,
         success: (data) => {
             const version = 'v' + remote.app.getVersion()
             const entries = $(data).find('entry')

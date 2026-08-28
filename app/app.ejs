@@ -15,7 +15,8 @@
         }
         #main {
             display: none;
-            height: calc(100% - 22px);
+            inset: 0;
+            height: 100%;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
             width: 100%;
             position: absolute;
@@ -26,7 +27,7 @@
         }
     </style>
 </head>
-<body bkid="<%=bkid%>">
+<body class="avalon-opening" bkid="<%=bkid%>">
     <%- include('frame') %>
     <div id="main">
         <%- include('welcome') %>
@@ -38,11 +39,8 @@
     </div>
     <%- include('overlay') %>
     <div id="loadingContainer">
-        <div id="loadingContent">
-            <div id="loadSpinnerContainer">
-                <img id="loadCenterImage" src="assets/images/LoadingSeal.png">
-                <img id="loadSpinnerImage" class="rotating" src="assets/images/LoadingText.png">
-            </div>
+        <div id="loadingContent" class="avalon-loading">
+            <div id="loadCenterImage">AVALON</div>
         </div>
     </div>
 </body>

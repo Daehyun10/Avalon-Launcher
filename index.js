@@ -12,12 +12,28 @@ const semver                            = require('semver')
 const { pathToFileURL }                 = require('url')
 const { AZURE_CLIENT_ID, MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR, SHELL_OPCODE } = require('./app/assets/js/ipcconstants')
 const LangLoader                        = require('./app/assets/js/langloader')
+const BRAND                             = require('./app/assets/js/brand')
+
+app.setName(BRAND.launcherName)
+app.setPath('userData', path.join(app.getPath('appData'), BRAND.launcherName))
 
 // Setup Lang
 LangLoader.setupLanguage()
 
 // Setup auto updater.
+function hasAutoUpdateFeed() {
+    if(isDev) {
+        return fs.existsSync(path.join(__dirname, 'dev-app-update.yml'))
+    }
+    return fs.existsSync(path.join(process.resourcesPath, 'app-update.yml'))
+}
+
 function initAutoUpdater(event, data) {
+
+    if(!BRAND.autoUpdateEnabled || !hasAutoUpdateFeed()) {
+        event.sender.send('autoUpdateNotification', 'disabled')
+        return false
+    }
 
     if(data){
         autoUpdater.allowPrerelease = true
@@ -29,6 +45,9 @@ function initAutoUpdater(event, data) {
     if(isDev){
         autoUpdater.autoInstallOnAppQuit = false
         autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
+    } else {
+        autoUpdater.autoDownload = true
+        autoUpdater.autoInstallOnAppQuit = true
     }
     if(process.platform === 'darwin'){
         autoUpdater.autoDownload = false
@@ -48,17 +67,23 @@ function initAutoUpdater(event, data) {
     autoUpdater.on('error', (err) => {
         event.sender.send('autoUpdateNotification', 'realerror', err)
     }) 
+    return true
 }
 
 // Open channel to listen for update actions.
 ipcMain.on('autoUpdateAction', (event, arg, data) => {
     switch(arg){
         case 'initAutoUpdater':
-            console.log('Initializing auto updater.')
-            initAutoUpdater(event, data)
-            event.sender.send('autoUpdateNotification', 'ready')
+            console.log('[Updater] Initializing AVALON auto updater.')
+            if(initAutoUpdater(event, data)) {
+                event.sender.send('autoUpdateNotification', 'ready')
+            }
             break
         case 'checkForUpdate':
+            if(!BRAND.autoUpdateEnabled || !hasAutoUpdateFeed()) {
+                event.sender.send('autoUpdateNotification', 'disabled')
+                break
+            }
             autoUpdater.checkForUpdates()
                 .catch(err => {
                     event.sender.send('autoUpdateNotification', 'realerror', err)
@@ -148,8 +173,8 @@ ipcMain.on(MSFT_OPCODE.OPEN_LOGIN, (ipcEvent, ...arguments_) => {
             let queryMap = {}
             
             new URL(uri).searchParams.forEach((v, k) => {
-                queryMap[k] = v;
-            });
+                queryMap[k] = v
+            })
 
             ipcEvent.reply(MSFT_OPCODE.REPLY_LOGIN, MSFT_REPLY_TYPE.SUCCESS, queryMap, msftAuthViewSuccess)
 
@@ -225,21 +250,27 @@ let win
 function createWindow() {
 
     win = new BrowserWindow({
-        width: 980,
-        height: 552,
+        title: BRAND.launcherName,
+        width: 1100,
+        height: 720,
+        minWidth: 960,
+        minHeight: 640,
         icon: getPlatformIcon('SealCircle'),
         frame: false,
+        transparent: true,
+        hasShadow: false,
         webPreferences: {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),
             nodeIntegration: true,
             contextIsolation: false
         },
-        backgroundColor: '#171614'
+        backgroundColor: '#00000000'
     })
     remoteMain.enable(win.webContents)
 
     const data = {
         bkid: Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'backgrounds')).length)),
+        brand: BRAND,
         lang: (str, placeHolders) => LangLoader.queryEJS(str, placeHolders)
     }
     Object.entries(data).forEach(([key, val]) => ejse.data(key, val))

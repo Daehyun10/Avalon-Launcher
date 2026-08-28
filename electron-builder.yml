@@ -1,8 +1,8 @@
-appId: 'helioslauncher'
-productName: 'Helios Launcher'
-artifactName: '${productName}-setup-${version}.${ext}'
+appId: 'com.avalon.launcher'
+productName: 'AVALON Launcher'
+artifactName: 'AVALON-Launcher-Setup-${version}.${ext}'
 
-copyright: 'Copyright © 2018-2026 Daniel Scalzi'
+copyright: 'AVALON Launcher. Based on HeliosLauncher. Copyright © 2018-2026 Daniel Scalzi'
 
 asar: true
 compression: 'maximum'
@@ -15,6 +15,9 @@ extraResources:
 
 # Windows Configuration
 win: 
+  # Development build: avoids Windows symlink-dependent signing tool extraction.
+  # Re-enable when a production signing certificate and CI environment exist.
+  signAndEditExecutable: false
   target: 
     - target: 'nsis'
       arch: 'x64'
@@ -33,7 +36,7 @@ mac:
       arch:
         - 'x64'
         - 'arm64'
-  artifactName: '${productName}-setup-${version}-${arch}.${ext}'
+  artifactName: 'AVALON-Launcher-Setup-${version}-${arch}.${ext}'
   category: 'public.app-category.games'
 
 # Linux Configuration
@@ -41,11 +44,17 @@ linux:
   target: 'AppImage'
   maintainer: 'Daniel Scalzi'
   vendor: 'Daniel Scalzi'
-  synopsis: 'Modded Minecraft Launcher'
-  description: 'Custom launcher which allows users to join modded servers. All mods, configurations, and updates are handled automatically.'
+  synopsis: 'AVALON game launcher'
+  description: 'Installs, updates, and launches the AVALON Minecraft experience.'
   category: 'Game'
 
 
 directories:
   buildResources: 'build'
   output: 'dist'
+
+publish:
+  provider: 'github'
+  owner: 'Daehyun10'
+  repo: 'Avalon-Launcher'
+  releaseType: 'release'

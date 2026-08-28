@@ -3966,3 +3966,1503 @@ input:checked + .toggleSwitchSlider:before {
 .rotating {
     animation: rotating 10s linear infinite;
 }
+/* ========================================================================== */
+/* AVALON v0.1 theme                                                          */
+/* ========================================================================== */
+:root {
+    --avalon-frame: #b51f35;
+    --avalon-frame-dark: #761426;
+    --avalon-screen: #0e1933;
+    --avalon-screen-light: #172a50;
+    --avalon-gold: #f3c85b;
+    --avalon-green: #55d68b;
+    --avalon-text: #fff8e7;
+    --avalon-muted: #aab4ca;
+    --avalon-shadow: #050811;
+    --radius-small: 8px;
+    --radius-medium: 14px;
+    --radius-large: 24px;
+    --motion-fast: 180ms;
+}
+
+body {
+    background: #080d1b !important;
+    color: var(--avalon-text);
+}
+
+#main {
+    height: calc(100% - 32px) !important;
+    background: radial-gradient(circle at 50% 38%, #1b3159 0%, #0a1227 68%, #060a16 100%) !important;
+}
+
+#frameBar {
+    height: 32px;
+    background: #080d1b;
+    border: 0;
+}
+
+#frameMain, #frameContentWin { height: 32px; }
+#frameTitleText { color: var(--avalon-muted); font-size: 11px; letter-spacing: 1.4px; }
+#frameButtonDockWin { -webkit-app-region: no-drag; }
+.frameButton { height: 32px; width: 44px; transition: background var(--motion-fast) ease; }
+.frameButton:hover { background: rgba(255,255,255,.09); }
+.frameButton.fCb:hover { background: var(--avalon-frame); }
+
+#landingContainer.avalon-launcher {
+    position: absolute;
+    inset: 0;
+    padding: 18px 24px 22px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.avalon-console {
+    height: 100%;
+    border-radius: var(--radius-large);
+    padding: 18px 18px 42px;
+    box-sizing: border-box;
+    background: linear-gradient(145deg, #d52b43, var(--avalon-frame) 54%, var(--avalon-frame-dark));
+    box-shadow: 0 22px 50px rgba(0,0,0,.45), inset 0 2px rgba(255,255,255,.18), inset 0 -4px rgba(64,3,16,.3);
+    position: relative;
+}
+
+.avalon-screen {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 4px solid #070b16;
+    background: linear-gradient(rgba(4,8,20,.14), rgba(4,8,20,.28)),
+        radial-gradient(circle at 50% 30%, #254473 0%, var(--avalon-screen-light) 38%, var(--avalon-screen) 78%);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.04), inset 0 0 45px rgba(0,0,0,.32);
+    display: grid;
+    grid-template-rows: 70px 1fr 72px;
+    position: relative;
+}
+
+.avalon-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .14;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.05) 4px);
+}
+
+.avalon-topbar, .avalon-footer {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.avalon-topbar { justify-content: space-between; }
+.avalon-brand-chip { color: rgba(255,248,231,.45); font-size: 10px; letter-spacing: 2px; }
+
+.avalon-account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 170px;
+    height: 44px;
+    padding: 5px 14px 5px 6px;
+    border-radius: 24px;
+    box-sizing: border-box;
+    background: rgba(4,8,20,.54);
+    border: 1px solid rgba(243,200,91,.28);
+    box-shadow: 0 4px 14px rgba(0,0,0,.2);
+}
+
+.avalon-avatar {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border-radius: 8px;
+    background: #25395e url('../images/icons/profile.svg') center/65% no-repeat;
+    image-rendering: pixelated;
+    overflow: hidden;
+}
+
+#avatarOverlay { width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.avalon-account-copy { display: flex; flex-direction: column; min-width: 0; }
+#user_text { color: var(--avalon-text); font-weight: 800; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.avalon-account-copy small { color: var(--avalon-muted); font-size: 8px; letter-spacing: 1px; }
+
+.avalon-hero {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.avalon-stars, .avalon-stars::before, .avalon-stars::after {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 3px;
+    background: rgba(255,248,231,.48);
+    box-shadow: -310px -65px rgba(255,248,231,.28), -250px 95px rgba(243,200,91,.35), -160px -120px rgba(255,248,231,.3), 190px -100px rgba(255,248,231,.35), 300px 40px rgba(243,200,91,.3), 245px 120px rgba(255,248,231,.25);
+}
+.avalon-stars::before { transform: translate(80px, 50px) scale(.7); }
+.avalon-stars::after { transform: translate(-70px, -25px) scale(.55); }
+
+.avalon-logo { text-align: center; margin-top: -28px; text-shadow: 0 5px 0 #4b1a20, 0 9px 22px rgba(0,0,0,.48); }
+.avalon-logo-crown { display: block; color: var(--avalon-gold); font-size: 24px; line-height: 1; margin-bottom: 4px; }
+.avalon-logo h1 { margin: 0; color: var(--avalon-text); font-family: ringbearer, Georgia, serif; font-size: clamp(68px, 9vw, 112px); letter-spacing: 8px; line-height: .95; }
+.avalon-logo p { margin: 12px 0 0; color: var(--avalon-gold); font-size: 10px; font-weight: 900; letter-spacing: 5px; }
+
+.avalon-launch-zone { min-height: 90px; margin-top: 36px; text-align: center; }
+#landingContainer #launch_content { display: inline-flex; flex-direction: column; align-items: center; gap: 9px; }
+#landingContainer #launch_button {
+    padding: 8px 18px;
+    border: 0;
+    background: transparent;
+    color: var(--avalon-text);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-shadow: 0 2px #000;
+    transition: transform var(--motion-fast) ease, color var(--motion-fast) ease, opacity var(--motion-fast) ease;
+    animation: avalon-pulse 2.4s ease-in-out infinite;
+}
+#landingContainer #launch_button:hover { color: var(--avalon-gold); transform: scale(1.03); }
+#landingContainer #launch_button:hover::before { content: '> '; }
+#landingContainer #launch_button:hover::after { content: ' <'; }
+#landingContainer #launch_button:disabled { opacity: .35; animation: none; cursor: default; }
+#landingContainer #server_selection_button { border: 0; background: transparent; color: var(--avalon-muted); font-size: 10px; letter-spacing: 1px; cursor: pointer; }
+
+#landingContainer #launch_details { display: none; width: 330px; flex-wrap: wrap; align-items: center; justify-content: center; gap: 9px 12px; }
+#landingContainer #launch_details_text { width: 100%; color: var(--avalon-text); font-weight: 900; letter-spacing: 2px; font-size: 15px; text-transform: uppercase; }
+#landingContainer #launch_progress { width: 260px !important; height: 8px; border: 0; border-radius: 0; overflow: hidden; }
+#landingContainer #launch_progress::-webkit-progress-bar { background: rgba(255,255,255,.12); }
+#landingContainer #launch_progress::-webkit-progress-value { background: var(--avalon-gold); }
+#landingContainer #launch_progress_label { width: 42px !important; color: var(--avalon-gold); font-size: 11px; font-weight: 800; }
+
+.avalon-footer { justify-content: space-between; color: var(--avalon-muted); }
+.avalon-server-status { display: flex; align-items: center; gap: 7px; min-width: 205px; font-size: 10px; font-weight: 900; letter-spacing: 1px; }
+.avalon-status-dot { color: var(--avalon-green); font-size: 13px; }
+#player_count { color: var(--avalon-text); }
+.avalon-version { position: absolute; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: 1px; }
+.avalon-actions { display: flex; align-items: center; gap: 16px; }
+.avalon-action { color: var(--avalon-muted); border: 0; background: transparent; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-decoration: none; cursor: pointer; transition: color var(--motion-fast) ease; }
+.avalon-action:hover { color: var(--avalon-gold); }
+.avalon-settings { font-size: 15px; }.avalon-settings span { font-size: 9px; margin-left: 4px; }
+
+.avalon-hardware { position: absolute; left: 30px; right: 30px; bottom: 12px; display: flex; align-items: center; justify-content: space-between; color: rgba(255,255,255,.4); font-size: 8px; letter-spacing: 2px; }
+.avalon-speaker { display: flex; gap: 5px; transform: rotate(-10deg); }.avalon-speaker i { display: block; width: 3px; height: 15px; border-radius: 2px; background: rgba(66,3,15,.38); }
+.avalon-led { width: 7px; height: 7px; border-radius: 50%; background: #ffda70; box-shadow: 0 0 7px rgba(255,218,112,.65); }
+.avalon-compat { display: none !important; }
+
+#loadingContainer { background: #080d1b !important; }
+#loadingContent.avalon-loading { display: flex; flex-direction: column; align-items: center; gap: 18px; color: var(--avalon-muted); font-size: 9px; letter-spacing: 3px; }
+#loadingContent.avalon-loading #loadSpinnerContainer { width: 230px; height: 90px; display: grid; place-items: center; }
+#loadingContent.avalon-loading #loadCenterImage { color: var(--avalon-text); font-family: ringbearer, Georgia, serif; font-size: 45px; letter-spacing: 6px; text-shadow: 0 4px 0 #4b1a20; }
+#loadingContent.avalon-loading #loadSpinnerImage { position: absolute; margin-top: 76px; width: auto; height: auto; color: var(--avalon-gold); font-size: 12px; }
+
+#settingsContainer, #overlayContainer, #loginOptionsContainer, #welcomeContainer, #waitingContainer { color: var(--avalon-text); }
+#settingsContainer { background: linear-gradient(145deg, #101c38, #080e20) !important; }
+#overlayContainer > #overlayContent { border-color: var(--avalon-frame) !important; background: #111c35 !important; }
+.avalon-attribution { margin: 8px 20px; color: var(--avalon-text); font-size: 13px; line-height: 1.5; }
+.avalon-attribution small { color: var(--avalon-muted); font-size: 10px; }
+
+@keyframes avalon-pulse { 0%,100% { opacity: .84; } 50% { opacity: 1; } }
+
+@media (max-width: 1000px), (max-height: 680px) {
+    #landingContainer.avalon-launcher { padding: 10px 14px 14px; }
+    .avalon-console { padding: 13px 13px 34px; }
+    .avalon-screen { grid-template-rows: 60px 1fr 58px; }
+    .avalon-logo h1 { font-size: 70px; }
+    .avalon-launch-zone { margin-top: 24px; }
+}
+
+/* ========================================================================== */
+/* AVALON medieval fantasy title screen                                       */
+/* ========================================================================== */
+:root {
+    --avalon-charcoal: #090a0b;
+    --avalon-iron: #171716;
+    --avalon-stone: #26231f;
+    --avalon-brown: #24170f;
+    --avalon-gold: #b99550;
+    --avalon-gold-bright: #d8bd79;
+    --avalon-ivory: #e8dfcc;
+    --avalon-muted: #9c9587;
+    --avalon-burgundy: #4e171b;
+    --avalon-amber: #b76e2c;
+}
+
+body { background: var(--avalon-charcoal) !important; }
+#main {
+    background: var(--avalon-charcoal) !important;
+    height: calc(100% - 32px) !important;
+}
+
+#frameBar {
+    height: 32px;
+    background: linear-gradient(180deg, #121212 0%, #090a0b 100%);
+    border-bottom: 1px solid rgba(185,149,80,.28);
+    box-shadow: 0 2px 12px rgba(0,0,0,.75);
+}
+#frameTitleText {
+    color: #8e856f;
+    font-family: Georgia, serif;
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+.frameButton:hover { background: rgba(185,149,80,.12); }
+.frameButton.fCb:hover { background: var(--avalon-burgundy); }
+
+#landingContainer.avalon-fantasy {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--avalon-charcoal);
+}
+
+.avalon-fantasy-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image:
+        linear-gradient(180deg, rgba(5,5,6,.46) 0%, rgba(5,5,6,.18) 35%, rgba(5,5,6,.36) 72%, rgba(5,5,6,.86) 100%),
+        url('../images/avalon/castle-gate-background.png');
+    background-position: center 48%;
+    background-size: cover;
+    box-shadow: inset 0 0 90px rgba(0,0,0,.72);
+}
+
+.avalon-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at center, transparent 18%, rgba(3,3,4,.14) 50%, rgba(3,3,4,.72) 100%),
+        linear-gradient(90deg, rgba(0,0,0,.45), transparent 22%, transparent 78%, rgba(0,0,0,.45));
+}
+
+.avalon-ornament {
+    position: absolute;
+    z-index: 2;
+    top: 68px;
+    width: 58px;
+    height: 150px;
+    opacity: .62;
+    border-top: 1px solid var(--avalon-gold);
+}
+.avalon-ornament::before,
+.avalon-ornament::after {
+    content: '';
+    position: absolute;
+    background: var(--avalon-gold);
+}
+.avalon-ornament::before { top: -5px; width: 9px; height: 9px; transform: rotate(45deg); }
+.avalon-ornament::after { top: 0; width: 1px; height: 92px; }
+.avalon-ornament-left { left: 26px; border-left: 1px solid var(--avalon-gold); }
+.avalon-ornament-left::before { left: -5px; }.avalon-ornament-left::after { left: 9px; }
+.avalon-ornament-right { right: 26px; border-right: 1px solid var(--avalon-gold); }
+.avalon-ornament-right::before { right: -5px; }.avalon-ornament-right::after { right: 9px; }
+
+.avalon-fantasy-topbar {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 25px 38px 0;
+}
+
+.avalon-account-plaque {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 190px;
+    height: 48px;
+    padding: 5px 22px 5px 7px;
+    box-sizing: border-box;
+    background: linear-gradient(100deg, rgba(25,24,21,.94), rgba(12,12,12,.78));
+    border-top: 1px solid rgba(216,189,121,.68);
+    border-bottom: 1px solid rgba(82,67,39,.78);
+    clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 50%, calc(100% - 13px) 100%, 0 100%, 7px 50%);
+    filter: drop-shadow(0 5px 7px rgba(0,0,0,.55));
+}
+.avalon-account-plaque::after {
+    content: '';
+    position: absolute;
+    left: 46px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: rgba(185,149,80,.38);
+}
+.avalon-account-plaque .avalon-avatar {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border-radius: 0;
+    border: 1px solid #806a3f;
+    background-color: #171716;
+    box-shadow: inset 0 0 0 2px #080808;
+    image-rendering: pixelated;
+}
+.avalon-account-plaque .avalon-account-copy { padding-left: 5px; }
+.avalon-account-plaque #user_text {
+    color: var(--avalon-ivory);
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .4px;
+}
+.avalon-account-plaque .avalon-account-copy small {
+    color: #92866d;
+    font-size: 7px;
+    letter-spacing: 1.2px;
+}
+
+.avalon-heraldic-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(216,189,121,.66);
+    text-shadow: 0 2px 6px #000;
+}
+.avalon-heraldic-mark span { font-family: Georgia, serif; font-size: 22px; }
+.avalon-heraldic-mark small { font-family: Georgia, serif; font-size: 8px; letter-spacing: 2px; }
+
+.avalon-fantasy-hero {
+    position: absolute;
+    z-index: 3;
+    inset: 75px 110px 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.avalon-title-crest,
+.avalon-title-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--avalon-gold);
+}
+.avalon-title-crest span { width: 56px; height: 1px; background: linear-gradient(90deg, transparent, var(--avalon-gold)); }
+.avalon-title-crest span:last-child { background: linear-gradient(90deg, var(--avalon-gold), transparent); }
+.avalon-title-crest b { font-size: 14px; font-weight: 400; text-shadow: 0 0 10px rgba(183,110,44,.35); }
+
+.avalon-title { margin-top: 8px; }
+.avalon-title h1 {
+    margin: 0;
+    color: var(--avalon-ivory);
+    font-family: ringbearer, Georgia, serif;
+    font-size: clamp(76px, 9vw, 118px);
+    font-weight: 400;
+    line-height: .9;
+    letter-spacing: 9px;
+    text-shadow: 0 3px 0 #2a1710, 0 7px 16px rgba(0,0,0,.9);
+}
+.avalon-title p {
+    margin: 16px 0 0;
+    color: var(--avalon-gold-bright);
+    font-family: Georgia, serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-shadow: 0 2px 5px #000;
+}
+.avalon-title-divider { margin-top: 18px; gap: 9px; }
+.avalon-title-divider i { display: block; width: 74px; height: 1px; background: linear-gradient(90deg, transparent, rgba(185,149,80,.8)); }
+.avalon-title-divider i:last-child { background: linear-gradient(90deg, rgba(185,149,80,.8), transparent); }
+.avalon-title-divider b { color: var(--avalon-gold); font-size: 7px; transform: rotate(45deg); }
+
+.avalon-fantasy .avalon-launch-zone { min-height: 96px; margin-top: 28px; }
+#landingContainer.avalon-fantasy #launch_content { display: inline-flex; flex-direction: column; align-items: center; gap: 11px; }
+#landingContainer.avalon-fantasy #launch_button {
+    position: relative;
+    min-width: 310px;
+    padding: 9px 34px 11px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    color: var(--avalon-ivory);
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 7px #000;
+    cursor: pointer;
+    animation: avalon-fantasy-breathe 3.4s ease-in-out infinite;
+    transition: color 180ms ease, border-color 180ms ease, letter-spacing 180ms ease;
+}
+#landingContainer.avalon-fantasy #launch_button::before,
+#landingContainer.avalon-fantasy #launch_button::after { content: '◇'; color: var(--avalon-gold); opacity: .6; margin: 0 13px; font-size: 9px; }
+#landingContainer.avalon-fantasy #launch_button:hover {
+    color: var(--avalon-gold-bright);
+    border-color: rgba(185,149,80,.45);
+    letter-spacing: 4.5px;
+    transform: none;
+}
+#landingContainer.avalon-fantasy #launch_button:hover::before,
+#landingContainer.avalon-fantasy #launch_button:hover::after { content: '◆'; opacity: .9; }
+#landingContainer.avalon-fantasy #launch_button:disabled { opacity: .4; animation: none; }
+#landingContainer.avalon-fantasy #server_selection_button {
+    border: 0;
+    background: transparent;
+    color: #a79f90;
+    font-family: Georgia, serif;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    text-shadow: 0 1px 4px #000;
+}
+
+#landingContainer.avalon-fantasy #launch_details {
+    display: none;
+    width: 380px;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+}
+#landingContainer.avalon-fantasy #launch_details_text {
+    color: var(--avalon-ivory);
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 5px #000;
+}
+.avalon-progress-row { display: flex; align-items: center; gap: 12px; }
+#landingContainer.avalon-fantasy #launch_progress { width: 280px !important; height: 5px; border: 1px solid rgba(185,149,80,.5); background: rgba(0,0,0,.58); }
+#landingContainer.avalon-fantasy #launch_progress::-webkit-progress-bar { background: rgba(0,0,0,.58); }
+#landingContainer.avalon-fantasy #launch_progress::-webkit-progress-value { background: linear-gradient(90deg, #77582a, var(--avalon-gold-bright)); }
+#landingContainer.avalon-fantasy #launch_progress_label { width: 40px !important; color: var(--avalon-gold-bright); font-family: Georgia, serif; font-size: 10px; }
+
+.avalon-fantasy-footer {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 38px;
+    box-sizing: border-box;
+    color: var(--avalon-muted);
+    border-top: 1px solid rgba(185,149,80,.2);
+    background: linear-gradient(180deg, rgba(7,7,7,.1), rgba(7,7,7,.72));
+}
+.avalon-fantasy .avalon-server-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 220px;
+    font-family: Georgia, serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+.avalon-status-rune { color: #756d60; font-size: 15px; }
+.avalon-fantasy #player_count { color: var(--avalon-ivory); }
+.avalon-footer-seal {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--avalon-gold);
+}
+.avalon-footer-seal span { font-size: 9px; }.avalon-footer-seal small { color: #8f8778; font-family: Georgia, serif; font-size: 8px; letter-spacing: 1px; }
+.avalon-fantasy .avalon-actions { display: flex; align-items: center; gap: 20px; }
+.avalon-fantasy .avalon-action {
+    padding: 5px 0;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    color: #a39a89;
+    font-family: Georgia, serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.avalon-fantasy .avalon-action:hover { color: var(--avalon-gold-bright); border-color: rgba(185,149,80,.5); }
+.avalon-fantasy .avalon-settings span { margin-right: 5px; color: var(--avalon-gold); font-size: 12px; }
+
+#loadingContainer { background: #090a0b !important; }
+#loadingContent.avalon-loading #loadCenterImage { color: var(--avalon-ivory); text-shadow: 0 3px 0 #2a1710, 0 6px 18px #000; }
+#loadingContent.avalon-loading #loadSpinnerImage { color: var(--avalon-gold); }
+
+#settingsContainer {
+    color: var(--avalon-ivory);
+    background: linear-gradient(115deg, rgba(12,12,12,.98), rgba(31,24,18,.98)) !important;
+}
+
+#loginOptionsContainer,
+#welcomeContainer,
+#waitingContainer {
+    background-image:
+        linear-gradient(180deg, rgba(6,6,7,.68), rgba(6,6,7,.82)),
+        url('../images/avalon/castle-gate-background.png') !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+#loginOptionsContent { background: radial-gradient(circle, rgba(10,9,8,.28), rgba(10,9,8,.72)) !important; }
+.loginOptionsMainContent h2 {
+    color: var(--avalon-ivory) !important;
+    font-family: ringbearer, Georgia, serif !important;
+    font-size: 28px !important;
+    font-weight: 400 !important;
+    letter-spacing: 3px;
+    text-shadow: 0 3px 8px #000;
+}
+.loginOptionButton {
+    border: 1px solid rgba(185,149,80,.52) !important;
+    border-radius: 0 !important;
+    background: linear-gradient(100deg, rgba(24,22,18,.94), rgba(10,10,10,.88)) !important;
+    color: var(--avalon-ivory) !important;
+    font-family: Georgia, serif !important;
+    clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+    box-shadow: 0 6px 18px rgba(0,0,0,.45);
+}
+.loginOptionButton:hover,
+.loginOptionButton:focus {
+    border-color: var(--avalon-gold-bright) !important;
+    background: rgba(67,50,27,.88) !important;
+}
+#settingsContainerLeft { background: #0c0c0c !important; border-right: 1px solid rgba(185,149,80,.3); }
+.settingsNavItem[selected], .settingsNavItem:hover { color: var(--avalon-gold-bright) !important; background: rgba(185,149,80,.08) !important; }
+#overlayContainer > #overlayContent { border: 1px solid rgba(185,149,80,.62) !important; border-radius: 0 !important; background: #16130f !important; box-shadow: 0 18px 55px rgba(0,0,0,.72) !important; }
+
+@keyframes avalon-fantasy-breathe {
+    0%, 100% { opacity: .82; }
+    50% { opacity: 1; }
+}
+
+@media (max-width: 1000px), (max-height: 680px) {
+    .avalon-fantasy-topbar { padding: 18px 26px 0; }
+    .avalon-fantasy-hero { inset: 62px 90px 62px; }
+    .avalon-title h1 { font-size: 76px; }
+    .avalon-title p { margin-top: 12px; }
+    .avalon-fantasy .avalon-launch-zone { margin-top: 20px; }
+    .avalon-fantasy-footer { height: 58px; padding: 0 26px; }
+}
+
+/* ========================================================================== */
+/* AVALON title screen refinement                                             */
+/* ========================================================================== */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#main,
+#landingContainer.avalon-fantasy,
+.avalon-fantasy-stage {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.avalon-fantasy-stage {
+    display: grid;
+    grid-template-rows: minmax(64px, auto) minmax(0, 1fr) minmax(58px, auto);
+    background-position: center 46%;
+}
+
+.avalon-fantasy-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(4, 4, 4, .34) 0%, transparent 24%, transparent 62%, rgba(4, 4, 4, .58) 100%);
+}
+
+.avalon-vignette {
+    background: radial-gradient(ellipse at center, transparent 24%, rgba(3, 3, 4, .12) 57%, rgba(3, 3, 4, .62) 100%);
+}
+
+.avalon-ornament,
+.avalon-heraldic-mark,
+.avalon-title-crest,
+.avalon-title-divider,
+.avalon-footer-seal {
+    display: none !important;
+}
+
+.avalon-fantasy-topbar {
+    position: relative;
+    z-index: 3;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    padding: clamp(14px, 2.4vh, 24px) clamp(20px, 3.5vw, 42px) 0;
+}
+
+.avalon-account-plaque {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    max-width: min(260px, 52vw);
+    min-width: 0;
+    height: 42px;
+    padding: 4px 13px 4px 4px;
+    background: rgba(10, 10, 9, .72);
+    border: 1px solid rgba(185, 149, 80, .32);
+    border-radius: 2px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .38);
+    clip-path: none;
+    filter: none;
+    justify-content: flex-start;
+}
+
+.avalon-account-plaque::after {
+    display: none;
+}
+
+.avalon-account-plaque #avatarContainer {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    box-sizing: border-box;
+    border-radius: 0;
+    border: 1px solid rgba(185, 149, 80, .45);
+    box-shadow: none;
+}
+
+.avalon-account-plaque #avatarOverlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.avalon-account-plaque .avalon-account-copy {
+    min-width: 0;
+    padding: 0;
+}
+
+.avalon-account-plaque #user_text {
+    position: static;
+    right: auto;
+    display: block;
+    min-width: 0;
+    max-width: 190px;
+    overflow: hidden;
+    color: var(--avalon-ivory);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.avalon-account-plaque .avalon-account-copy small {
+    display: block;
+    margin-top: 2px;
+    color: #958c7b;
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    letter-spacing: .04em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.avalon-fantasy-hero {
+    position: relative;
+    inset: auto;
+    z-index: 3;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 clamp(20px, 6vw, 80px);
+    transform: translateY(-1.5vh);
+}
+
+.avalon-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.avalon-title h1 {
+    font-size: clamp(54px, min(10vw, 15vh), 116px);
+    font-weight: 400;
+    letter-spacing: .045em;
+    line-height: .9;
+    text-shadow: 0 3px 0 #271710, 0 7px 18px rgba(0, 0, 0, .82);
+}
+
+.avalon-title p {
+    margin: clamp(10px, 2vh, 16px) 0 0;
+    font-size: clamp(8px, 1.05vw, 11px);
+    letter-spacing: .18em;
+    line-height: 1.2;
+}
+
+.avalon-fantasy .avalon-launch-zone {
+    min-height: 74px;
+    margin-top: clamp(24px, 5vh, 42px);
+}
+
+#landingContainer.avalon-fantasy #launch_content {
+    gap: 0;
+}
+
+#landingContainer.avalon-fantasy #launch_button {
+    min-width: 0;
+    padding: 7px 18px 9px;
+    color: var(--avalon-ivory);
+    font-size: clamp(12px, 1.45vw, 15px);
+    font-weight: 600;
+    letter-spacing: .16em;
+    opacity: 1;
+    animation: none;
+    transition: color 160ms ease, border-color 160ms ease;
+}
+
+#landingContainer.avalon-fantasy #launch_button::before,
+#landingContainer.avalon-fantasy #launch_button::after {
+    content: '';
+    margin: 0;
+}
+
+#landingContainer.avalon-fantasy #launch_button:hover,
+#landingContainer.avalon-fantasy #launch_button:focus-visible {
+    color: var(--avalon-gold-bright);
+    border-color: rgba(185, 149, 80, .5);
+    letter-spacing: .16em;
+    outline: none;
+}
+
+#landingContainer.avalon-fantasy #launch_button:hover::before,
+#landingContainer.avalon-fantasy #launch_button:focus-visible::before {
+    content: '—';
+    margin-right: 12px;
+    color: var(--avalon-gold);
+}
+
+#landingContainer.avalon-fantasy #launch_button:hover::after,
+#landingContainer.avalon-fantasy #launch_button:focus-visible::after {
+    content: '—';
+    margin-left: 12px;
+    color: var(--avalon-gold);
+}
+
+#landingContainer.avalon-fantasy #launch_button:disabled {
+    color: var(--avalon-ivory);
+    cursor: default;
+    opacity: 1;
+}
+
+#landingContainer.avalon-fantasy #launch_button:disabled:hover {
+    border-color: transparent;
+}
+
+#landingContainer.avalon-fantasy #launch_button:disabled:hover::before,
+#landingContainer.avalon-fantasy #launch_button:disabled:hover::after,
+#landingContainer.avalon-fantasy #server_selection_button {
+    display: none;
+}
+
+#landingContainer.avalon-fantasy #launch_details {
+    width: min(380px, 78vw);
+}
+
+.avalon-progress-row {
+    width: min(340px, 74vw);
+}
+
+#landingContainer.avalon-fantasy #launch_progress {
+    width: min(280px, calc(74vw - 52px)) !important;
+}
+
+.avalon-fantasy-footer {
+    position: relative;
+    z-index: 3;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    align-self: stretch;
+    height: auto;
+    min-width: 0;
+    min-height: 58px;
+    padding: 0 clamp(20px, 3.5vw, 42px);
+    background: rgba(5, 5, 5, .26);
+    border-top: 1px solid rgba(185, 149, 80, .18);
+}
+
+.avalon-fantasy .avalon-server-status {
+    min-width: 0;
+    gap: 7px;
+    color: #aaa191;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    white-space: nowrap;
+}
+
+.avalon-status-dot {
+    flex: 0 0 auto;
+    color: #756d60;
+    font-size: 9px;
+}
+
+.avalon-fantasy #player_count {
+    color: var(--avalon-ivory);
+}
+
+.avalon-fantasy .avalon-actions {
+    min-width: 0;
+    gap: 0;
+}
+
+.avalon-fantasy .avalon-action {
+    padding: 8px 0;
+    color: #aaa191;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .06em;
+}
+
+.avalon-fantasy .avalon-settings span {
+    display: none;
+}
+
+@media (max-width: 720px), (max-height: 560px) {
+    .avalon-fantasy-stage {
+        grid-template-rows: minmax(52px, auto) minmax(0, 1fr) minmax(48px, auto);
+    }
+
+    .avalon-fantasy-topbar {
+        padding-top: 10px;
+    }
+
+    .avalon-account-plaque {
+        height: 38px;
+    }
+
+    .avalon-account-plaque #avatarContainer {
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
+    }
+
+    .avalon-title h1 {
+        font-size: clamp(46px, min(12vw, 14vh), 76px);
+    }
+
+    .avalon-fantasy .avalon-launch-zone {
+        min-height: 58px;
+        margin-top: clamp(16px, 3.5vh, 24px);
+    }
+
+    .avalon-fantasy-footer {
+        min-height: 48px;
+    }
+}
+
+/* ========================================================================== */
+/* AVALON opening title                                                       */
+/* ========================================================================== */
+#loadingContainer {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 400;
+    background: transparent !important;
+}
+
+html:has(body.avalon-opening),
+body.avalon-opening {
+    background: transparent !important;
+}
+
+body.avalon-opening #frameBar {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#loadingContent.avalon-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+#loadingContent.avalon-loading #loadCenterImage {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    color: #e8dfca;
+    font-family: ringbearer, Georgia, serif;
+    font-size: clamp(54px, 8vw, 92px);
+    font-weight: 400;
+    letter-spacing: .075em;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(8px);
+    text-shadow: 0 3px 0 #24150f, 0 8px 24px rgba(0, 0, 0, .75);
+    animation: avalon-opening-title 1.65s cubic-bezier(.22, .7, .2, 1) .12s forwards;
+}
+
+#loadSpinnerContainer,
+#loadSpinnerImage,
+#loadingContent.avalon-loading > span {
+    display: none !important;
+}
+
+@keyframes avalon-opening-title {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+        letter-spacing: .14em;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: .075em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #loadingContent.avalon-loading #loadCenterImage {
+        animation-duration: .35s;
+        transform: none;
+    }
+}
+
+/* ========================================================================== */
+/* AVALON settings layout refinement                                          */
+/* ========================================================================== */
+#settingsContainer {
+    display: grid;
+    grid-template-columns: clamp(216px, 23vw, 264px) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    box-sizing: border-box;
+    padding-top: 46px;
+    overflow: hidden;
+    color: var(--avalon-ivory);
+    background:
+        radial-gradient(circle at 78% 12%, rgba(112, 79, 37, .13), transparent 34%),
+        #0b0a09 !important;
+}
+
+#settingsContainer::before {
+    top: 46px;
+    z-index: 3;
+    height: 10px;
+    pointer-events: none;
+}
+
+#settingsContainerLeft,
+#settingsContainerRight {
+    width: auto;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+#settingsContainerLeft {
+    padding: 0;
+    background: rgba(8, 8, 7, .78) !important;
+    border-right: 1px solid rgba(185, 149, 80, .22);
+}
+
+#settingsNavContainer {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 24px 18px 18px;
+}
+
+#settingsNavHeader {
+    display: flex;
+    flex: 0 0 auto;
+    height: auto;
+    justify-content: flex-start;
+    padding: 0 12px 22px;
+}
+
+#settingsNavHeaderText {
+    color: #e8dfca;
+    font-family: ringbearer, Georgia, serif;
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: .08em;
+}
+
+#settingsNavItemsContainer {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+    justify-content: stretch;
+}
+
+#settingsNavItemsContent {
+    width: 100%;
+    height: 100%;
+}
+
+.settingsNavItem,
+#settingsNavDone {
+    box-sizing: border-box;
+    min-height: 38px;
+    margin: 2px 0;
+    padding: 0 12px;
+    border: 0;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    color: #9f988a;
+    font-family: 'Avenir Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: .045em;
+    text-shadow: none;
+}
+
+.settingsNavItem:hover,
+.settingsNavItem:focus-visible,
+.settingsNavItem[selected] {
+    color: var(--avalon-gold-bright) !important;
+    border-left-color: rgba(202, 168, 97, .72);
+    background: linear-gradient(90deg, rgba(185, 149, 80, .12), transparent 88%) !important;
+    text-shadow: none;
+    outline: none;
+}
+
+.settingsNavSpacer {
+    flex: 1 1 auto;
+    min-height: 16px;
+    height: auto;
+}
+
+#settingsNavContentBottom {
+    position: static;
+    top: auto;
+    margin-top: auto;
+}
+
+.settingsNavDivider {
+    width: 100%;
+    margin: 0 0 12px;
+    background: rgba(185, 149, 80, .18);
+}
+
+#settingsNavDone {
+    width: 100%;
+    color: #d8cfbb;
+}
+
+#settingsNavDone:hover,
+#settingsNavDone:focus-visible {
+    color: var(--avalon-gold-bright);
+    border-left-color: rgba(202, 168, 97, .72);
+    background: linear-gradient(90deg, rgba(185, 149, 80, .12), transparent 88%);
+    text-shadow: none;
+}
+
+#settingsContainerRight {
+    overflow: hidden;
+    background: rgba(12, 11, 10, .62);
+}
+
+.settingsTab {
+    box-sizing: border-box;
+    min-height: 0;
+    max-height: 100%;
+    padding: 30px clamp(34px, 5.2vw, 76px) 48px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: rgba(185, 149, 80, .42) transparent;
+}
+
+.settingsTab::-webkit-scrollbar {
+    width: 5px;
+}
+
+.settingsTab::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: rgba(185, 149, 80, .34);
+    box-shadow: none;
+}
+
+.settingsTab > *:first-child {
+    margin-top: 0;
+}
+
+.settingsTab > *:last-child {
+    margin-bottom: 0;
+}
+
+.settingsTabHeader,
+.settingsFieldContainer,
+.settingsDivider,
+.settingsSelServContainer,
+.settingsFileSelContainer,
+.settingsMemoryHeader,
+.settingsMemoryContent,
+.settingsCurrentAccounts,
+.settingsAuthAccountTypeContainer,
+.settingsChangelogContainer {
+    box-sizing: border-box;
+    width: min(100%, 780px);
+}
+
+.settingsTabHeader {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(185, 149, 80, .2);
+}
+
+.settingsTabHeaderText {
+    color: #e8dfca;
+    font-family: ringbearer, Georgia, serif;
+    font-size: 29px;
+    font-weight: 400;
+    letter-spacing: .055em;
+}
+
+.settingsTabHeaderDesc {
+    max-width: 620px;
+    margin-top: 7px;
+    color: #aaa292;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.settingsFieldContainer {
+    min-height: 72px;
+    padding: 16px 0;
+    gap: 24px;
+    border-bottom: 1px solid rgba(185, 149, 80, .14);
+}
+
+.settingsFieldLeft {
+    min-width: 0;
+}
+
+.settingsFieldRight {
+    flex: 0 0 auto;
+}
+
+.settingsFieldTitle,
+.settingsMemoryLabel,
+.settingsFileSelTitle {
+    color: #ded5c2;
+    font-family: 'Avenir Medium', sans-serif;
+    font-size: 13px;
+    letter-spacing: .02em;
+}
+
+.settingsFieldDesc,
+.settingsFileSelDesc,
+.settingsFileSelVal {
+    margin-top: 5px;
+    color: #918a7d;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.settingsDivider {
+    background: rgba(185, 149, 80, .14);
+}
+
+#settingsContainer input[type=number],
+#settingsContainer input[type=text],
+.settingsSelectSelected {
+    box-sizing: border-box;
+    min-height: 34px;
+    padding: 7px 10px;
+    border: 1px solid rgba(185, 149, 80, .28);
+    border-radius: 1px;
+    color: #e5dcc8;
+    background: rgba(5, 5, 5, .42);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+#settingsContainer input[type=number]:focus,
+#settingsContainer input[type=text]:focus,
+.settingsSelectSelected:focus-visible {
+    border-color: rgba(213, 177, 98, .68);
+    outline: none;
+}
+
+.settingsSelServContainer,
+.settingsFileSelContainer,
+.settingsMemoryContent,
+.settingsAuthAccountTypeContainer,
+.settingsChangelogContainer {
+    margin: 12px 0;
+    border: 1px solid rgba(185, 149, 80, .18);
+    border-radius: 1px;
+    background: rgba(5, 5, 5, .24);
+}
+
+.settingsFileSelContainer,
+.settingsMemoryContent,
+.settingsAuthAccountTypeContainer,
+.settingsChangelogContainer {
+    padding: 15px 16px;
+}
+
+.settingsSwitchServerButton,
+.settingsFileSelButton,
+.settingsAboutButton,
+.settingsChangelogButton,
+.settingsAddAuthAccount {
+    min-height: 30px;
+    padding: 6px 12px;
+    border: 1px solid rgba(185, 149, 80, .44) !important;
+    border-radius: 1px !important;
+    color: #d9cfb9 !important;
+    background: rgba(28, 23, 17, .72) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+.settingsSwitchServerButton:hover,
+.settingsFileSelButton:hover,
+.settingsAboutButton:hover,
+.settingsChangelogButton:hover,
+.settingsAddAuthAccount:hover {
+    border-color: rgba(218, 181, 100, .82) !important;
+    color: #f0e4c9 !important;
+    background: rgba(67, 50, 27, .7) !important;
+    box-shadow: none !important;
+}
+
+.toggleSwitch {
+    width: 38px;
+    height: 20px;
+}
+
+.toggleSwitchSlider {
+    border: 1px solid rgba(185, 149, 80, .28);
+    border-radius: 20px;
+    background-color: rgba(4, 4, 4, .55);
+    box-shadow: none;
+}
+
+.toggleSwitch input:checked + .toggleSwitchSlider {
+    background-color: rgba(124, 88, 35, .82);
+}
+
+@media (max-width: 760px) {
+    #settingsContainer {
+        grid-template-columns: 190px minmax(0, 1fr);
+    }
+
+    #settingsNavContainer {
+        padding-inline: 12px;
+    }
+
+    .settingsTab {
+        padding-inline: 24px;
+    }
+
+    .settingsFieldContainer {
+        align-items: flex-start;
+        gap: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .avalon-account-plaque {
+        max-width: 62vw;
+    }
+
+    .avalon-account-plaque #user_text {
+        max-width: 42vw;
+    }
+
+    .avalon-title h1 {
+        letter-spacing: .025em;
+    }
+
+    .avalon-fantasy-footer {
+        padding-inline: 16px;
+    }
+}
+
+/* ========================================================================== */
+/* AVALON full-scene frameless presentation                                   */
+/* ========================================================================== */
+body {
+    border: 0;
+    background: var(--avalon-charcoal) !important;
+}
+
+#main {
+    inset: 0;
+    width: 100%;
+    height: 100% !important;
+    background: transparent !important;
+}
+
+#frameBar {
+    position: absolute;
+    z-index: 200;
+    inset: 0 0 auto;
+    width: 100%;
+    height: 48px;
+    border: 0;
+    background: transparent !important;
+    box-shadow: none;
+    -webkit-app-region: drag;
+    pointer-events: auto;
+}
+
+#frameResizableTop,
+#frameMain,
+#frameContentWin,
+#frameContentDarwin,
+#frameTitleDock,
+#frameTitleText,
+.frameResizableVert {
+    display: none !important;
+}
+
+#frameDragRegion {
+    position: absolute;
+    top: 0;
+    right: 150px;
+    left: min(290px, 32vw);
+    height: 34px;
+    -webkit-app-region: drag;
+    pointer-events: none;
+}
+
+#frameButtonDockWin,
+#frameButtonDockDarwin {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    -webkit-app-region: no-drag !important;
+    pointer-events: auto;
+}
+
+#frameButtonDockWin > .frameButton:not(:first-child) {
+    margin-left: 0;
+}
+
+.frameButton {
+    width: 32px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    opacity: .58;
+    transition: background-color 150ms ease, opacity 150ms ease;
+}
+
+.frameButton:hover,
+.frameButton:focus-visible {
+    background: rgba(12, 12, 11, .28);
+    opacity: 1;
+    outline: none;
+}
+
+.frameButton.fCb:hover,
+#frameButton_close:hover,
+#frameButton_close:focus-visible {
+    background: rgba(78, 23, 27, .52) !important;
+}
+
+.avalon-fantasy-stage {
+    position: relative;
+    display: block;
+    box-shadow: none;
+}
+
+.avalon-fantasy-topbar {
+    position: absolute;
+    z-index: 210;
+    top: 0;
+    left: 0;
+    width: auto;
+    padding: clamp(16px, 2.8vh, 26px) 0 0 clamp(20px, 3.5vw, 42px);
+    -webkit-app-region: no-drag;
+}
+
+.avalon-account-plaque {
+    background: rgba(8, 8, 7, .38);
+    border-color: rgba(185, 149, 80, .2);
+    box-shadow: none;
+}
+
+.avalon-fantasy-hero {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    box-sizing: border-box;
+    transform: none;
+}
+
+.avalon-fantasy-footer {
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 0;
+    padding: 0 clamp(20px, 3.5vw, 42px) clamp(18px, 3vh, 30px);
+    border: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+.avalon-fantasy .avalon-server-status,
+.avalon-fantasy .avalon-actions,
+.avalon-fantasy .avalon-action {
+    -webkit-app-region: no-drag;
+    pointer-events: auto;
+}
+
+@media (max-width: 720px), (max-height: 560px) {
+    #frameDragRegion {
+        right: 126px;
+        left: min(250px, 34vw);
+    }
+
+    #frameButtonDockWin,
+    #frameButtonDockDarwin {
+        top: 7px;
+        right: 8px;
+    }
+
+    .avalon-fantasy-topbar {
+        padding-top: 12px;
+    }
+
+    .avalon-fantasy-footer {
+        padding-bottom: 14px;
+    }
+}

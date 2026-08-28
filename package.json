@@ -1,14 +1,11 @@
 {
-  "name": "helioslauncher",
-  "version": "2.2.1",
-  "productName": "Helios Launcher",
-  "description": "Modded Minecraft Launcher",
+  "name": "avalon-launcher",
+  "version": "0.1.5",
+  "productName": "AVALON Launcher",
+  "description": "Dedicated launcher for AVALON",
   "author": "Daniel Scalzi (https://github.com/dscalzi/)",
-  "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/HeliosLauncher",
-  "bugs": {
-    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
-  },
+  "license": "MIT",
+  "homepage": "https://github.com/Daehyun10/Avalon-Launcher",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -47,6 +44,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
+    "url": "git+https://github.com/Daehyun10/Avalon-Launcher.git"
   }
 }

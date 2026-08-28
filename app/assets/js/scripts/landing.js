@@ -65,7 +65,8 @@ function toggleLaunchArea(loading){
  * @param {string} details The new text for the loading details.
  */
 function setLaunchDetails(details){
-    launch_details_text.innerHTML = details
+    const readable = String(details).replace(/<[^>]*>/g, '').replace(/\.{2,}/g, '...').trim()
+    launch_details_text.textContent = readable
 }
 
 /**
@@ -127,6 +128,12 @@ document.getElementById('launch_button').addEventListener('click', async e => {
     }
 })
 
+document.getElementById('avalonHero').addEventListener('click', e => {
+    if(e.target.closest('button, a') == null && !document.getElementById('launch_button').disabled) {
+        document.getElementById('launch_button').click()
+    }
+})
+
 // Bind settings button
 document.getElementById('settingsMediaButton').onclick = async e => {
     await prepareSettings()
@@ -149,7 +156,7 @@ function updateSelectedAccount(authUser){
             username = authUser.displayName
         }
         if(authUser.uuid != null){
-            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/body/${authUser.uuid}/right')`
+            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/avatar/${authUser.uuid}/64')`
         }
     }
     user_text.innerHTML = username
@@ -239,14 +246,13 @@ const refreshServerStatus = async (fade = false) => {
     loggerLanding.info('Refreshing Server Status')
     const serv = (await DistroAPI.getDistribution()).getServerById(ConfigManager.getSelectedServer())
 
-    let pLabel = Lang.queryJS('landing.serverStatus.server')
-    let pVal = Lang.queryJS('landing.serverStatus.offline')
+    let pLabel = 'SERVER OFFLINE'
+    let pVal = ''
 
     try {
 
         const servStat = await getServerStatus(47, serv.hostname, serv.port)
-        console.log(servStat)
-        pLabel = Lang.queryJS('landing.serverStatus.players')
+        pLabel = 'ONLINE'
         pVal = servStat.players.online + '/' + servStat.players.max
 
     } catch (err) {
@@ -263,6 +269,8 @@ const refreshServerStatus = async (fade = false) => {
         document.getElementById('landingPlayerLabel').innerHTML = pLabel
         document.getElementById('player_count').innerHTML = pVal
     }
+    const dot = document.querySelector('.avalon-status-dot')
+    if(dot) dot.style.color = pLabel === 'ONLINE' ? 'var(--avalon-green)' : 'var(--avalon-muted)'
     
 }
 
@@ -616,8 +624,7 @@ async function dlAsync(login = true) {
 
             // Init Discord Hook
             if(distro.rawDistribution.discord != null && serv.rawServer.discord != null){
-                DiscordWrapper.initRPC(distro.rawDistribution.discord, serv.rawServer.discord)
-                hasRPC = true
+                hasRPC = DiscordWrapper.initRPC(distro.rawDistribution.discord, serv.rawServer.discord)
                 proc.on('close', (code, signal) => {
                     loggerLaunchSuite.info('Shutting down Discord Rich Presence..')
                     DiscordWrapper.shutdownRPC()
@@ -961,7 +968,7 @@ async function loadNews(){
     const distroData = await DistroAPI.getDistribution()
     if(!distroData.rawDistribution.rss) {
         loggerLanding.debug('No RSS feed provided.')
-        return null
+        return { articles: [] }
     }
 
     const promise = new Promise((resolve, reject) => {

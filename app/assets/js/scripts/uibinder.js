@@ -68,11 +68,14 @@ async function showMainUI(data){
     updateSelectedServer(data.getServerById(ConfigManager.getSelectedServer()))
     refreshServerStatus()
     setTimeout(() => {
-        document.getElementById('frameBar').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-        document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`
+        $('#loadingContainer').stop(true, true).hide()
+        document.getElementById('frameBar').style.backgroundColor = 'transparent'
+        document.body.style.backgroundImage = 'none'
         $('#main').show()
+        document.body.classList.remove('avalon-opening')
 
         const isLoggedIn = Object.keys(ConfigManager.getAuthAccounts()).length > 0
+        const isUIPreview = isDev && process.env.AVALON_UI_PREVIEW === 'true'
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
@@ -80,7 +83,12 @@ async function showMainUI(data){
             validateSelectedAccount()
         }
 
-        if(ConfigManager.isFirstLaunch()){
+        if(isUIPreview) {
+            currentView = VIEWS.landing
+            $(VIEWS.landing).fadeIn(300)
+            setLaunchEnabled(false)
+            document.getElementById('server_selection_button').textContent = ''
+        } else if(ConfigManager.isFirstLaunch()){
             currentView = VIEWS.welcome
             $(VIEWS.welcome).fadeIn(1000)
         } else {
@@ -96,13 +104,7 @@ async function showMainUI(data){
             }
         }
 
-        setTimeout(() => {
-            $('#loadingContainer').fadeOut(500, () => {
-                $('#loadSpinnerImage').removeClass('rotating')
-            })
-        }, 250)
-        
-    }, 750)
+    }, 1800)
     // Disable tabbing to the news container.
     initNews().then(() => {
         $('#newsContainer *').attr('tabindex', '-1')

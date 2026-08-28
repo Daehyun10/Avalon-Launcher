@@ -11,6 +11,7 @@ const remote                         = require('@electron/remote')
 const isDev                          = require('./assets/js/isdev')
 const { LoggerUtil }                 = require('helios-core')
 const Lang                           = require('./assets/js/langloader')
+const UI_BRAND                       = require('./assets/js/brand')
 
 const loggerUICore             = LoggerUtil.getLogger('UICore')
 const loggerAutoUpdater        = LoggerUtil.getLogger('AutoUpdater')
@@ -47,8 +48,8 @@ if(!isDev){
             case 'update-available':
                 loggerAutoUpdater.info('New update available', info.version)
                 
-                if(process.platform === 'darwin'){
-                    info.darwindownload = `https://github.com/dscalzi/HeliosLauncher/releases/download/v${info.version}/Helios-Launcher-setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
+                if(process.platform === 'darwin' && UI_BRAND.updateRepository){
+                    info.darwindownload = `${UI_BRAND.updateRepository}/releases/download/v${info.version}/AVALON-Launcher-Setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
                     showUpdateUI(info)
                 }
                 
@@ -72,6 +73,12 @@ if(!isDev){
                     ipcRenderer.send('autoUpdateAction', 'checkForUpdate')
                 }, 1800000)
                 ipcRenderer.send('autoUpdateAction', 'checkForUpdate')
+                break
+            case 'disabled':
+                loggerAutoUpdater.info('This AVALON build does not include an update feed.')
+                if(typeof settingsUpdateButtonStatus === 'function') {
+                    settingsUpdateButtonStatus('Updates unavailable in this build.', true)
+                }
                 break
             case 'realerror':
                 if(info != null && info.code != null){
@@ -183,10 +190,14 @@ document.addEventListener('readystatechange', function () {
         //const targetWidth2 = document.getElementById("server_selection").getBoundingClientRect().width
         //const targetWidth3 = document.getElementById("launch_button").getBoundingClientRect().width
 
-        document.getElementById('launch_details').style.maxWidth = 266.01
-        document.getElementById('launch_progress').style.width = 170.8
-        document.getElementById('launch_details_right').style.maxWidth = 170.8
-        document.getElementById('launch_progress_label').style.width = 53.21
+        const launchDetails = document.getElementById('launch_details')
+        const launchProgress = document.getElementById('launch_progress')
+        const launchDetailsRight = document.getElementById('launch_details_right')
+        const launchProgressLabel = document.getElementById('launch_progress_label')
+        if(launchDetails) launchDetails.style.maxWidth = 330
+        if(launchProgress) launchProgress.style.width = 260
+        if(launchDetailsRight) launchDetailsRight.style.maxWidth = 260
+        if(launchProgressLabel) launchProgressLabel.style.width = 42
         
     }
 

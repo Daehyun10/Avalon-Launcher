@@ -11,6 +11,10 @@ let client
 let activity
 
 exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.queryJS('discord.waiting')){
+    if(!genSettings?.clientId || !servSettings) {
+        logger.info('Discord RPC disabled: no AVALON client configuration.')
+        return false
+    }
     client = new Client({ transport: 'ipc' })
 
     activity = {
@@ -36,9 +40,11 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.quer
             logger.info('Unable to initialize Discord Rich Presence: ' + error.message, error)
         }
     })
+    return true
 }
 
 exports.updateDetails = function(details){
+    if(!activity || !client) return
     activity.details = details
     client.setActivity(activity)
 }
