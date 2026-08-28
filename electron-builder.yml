@@ -1,0 +1,60 @@
+appId: 'com.avalon.launcher'
+productName: 'AVALON Launcher'
+artifactName: 'AVALON-Launcher-Setup-${version}.${ext}'
+
+copyright: 'AVALON Launcher. Based on HeliosLauncher. Copyright © 2018-2026 Daniel Scalzi'
+
+asar: true
+compression: 'maximum'
+
+files:
+  - '!{dist,.gitignore,.vscode,docs,dev-app-update.yml,.nvmrc,eslint.config.mjs}'
+
+extraResources:
+  - 'libraries'
+
+# Windows Configuration
+win: 
+  # Development build: avoids Windows symlink-dependent signing tool extraction.
+  # Re-enable when a production signing certificate and CI environment exist.
+  signAndEditExecutable: false
+  target: 
+    - target: 'nsis'
+      arch: 'x64'
+
+# Windows Installer Configuration
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+
+# macOS Configuration
+mac:
+  target:
+    - target: 'dmg'
+      arch:
+        - 'x64'
+        - 'arm64'
+  artifactName: 'AVALON-Launcher-Setup-${version}-${arch}.${ext}'
+  category: 'public.app-category.games'
+
+# Linux Configuration
+linux: 
+  target: 'AppImage'
+  maintainer: 'Daniel Scalzi'
+  vendor: 'Daniel Scalzi'
+  synopsis: 'AVALON game launcher'
+  description: 'Installs, updates, and launches the AVALON Minecraft experience.'
+  category: 'Game'
+
+
+directories:
+  buildResources: 'build'
+  output: 'dist'
+
+publish:
+  provider: 'github'
+  owner: 'Daehyun10'
+  repo: 'Avalon-Launcher'
+  releaseType: 'release'

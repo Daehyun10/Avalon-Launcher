@@ -1,0 +1,61 @@
+<div id="landingContainer" class="avalon-launcher avalon-fantasy" style="display: none;">
+    <section class="avalon-fantasy-stage">
+        <div class="avalon-vignette" aria-hidden="true"></div>
+
+        <header class="avalon-fantasy-topbar">
+            <div id="user_content" class="avalon-account-plaque" title="Manage accounts">
+                <div id="avatarContainer" class="avalon-avatar">
+                    <button id="avatarOverlay" aria-label="Manage account"></button>
+                </div>
+                <div class="avalon-account-copy">
+                    <span id="user_text"><%- lang('landing.usernamePlaceholder') %></span>
+                    <small>Microsoft</small>
+                </div>
+            </div>
+        </header>
+
+        <main id="avalonHero" class="avalon-fantasy-hero">
+            <div class="avalon-title" aria-label="AVALON">
+                <h1>AVALON</h1>
+                <p>THE SHATTERED THRONE</p>
+            </div>
+
+            <div class="avalon-launch-zone">
+                <div id="launch_content">
+                    <button id="launch_button"><%- lang('landing.launchButton') %></button>
+                    <button id="server_selection_button" aria-hidden="true" tabindex="-1"><%- lang('landing.launchButtonPlaceholder') %></button>
+                </div>
+                <div id="launch_details">
+                    <span id="launch_details_text"><%- lang('landing.launchDetails') %></span>
+                    <div class="avalon-progress-row">
+                        <progress id="launch_progress" value="0" max="100"></progress>
+                        <span id="launch_progress_label">0%</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="avalon-fantasy-footer">
+            <div id="server_status_wrapper" class="avalon-server-status">
+                <span class="avalon-status-dot" aria-hidden="true">●</span>
+                <span id="landingPlayerLabel">SERVER OFFLINE</span>
+                <span id="player_count"></span>
+            </div>
+            <div class="avalon-actions">
+                <button class="avalon-action avalon-settings" id="settingsMediaButton" aria-label="Settings">SETTINGS</button>
+            </div>
+        </footer>
+    </section>
+
+    <div class="avalon-compat" aria-hidden="true">
+        <div id="image_seal_container"><div id="updateAvailableTooltip"><%- lang('landing.updateAvailableTooltip') %></div></div>
+        <div id="mojangStatusWrapper"><span id="mojang_status_icon">●</span><div id="mojangStatusEssentialContainer"></div><div id="mojangStatusNonEssentialContainer"></div></div>
+        <button id="newsButton"></button><div id="newsContent" article="-1"></div><span id="nELoadSpan"></span>
+        <div id="upper"></div><div id="lower"><div id="left"></div><div id="center"><div id="content"></div></div><div id="right"></div></div>
+        <div id="newsContainer"><div id="newsErrorContainer"><div id="newsErrorLoading"></div><div id="newsErrorFailed"></div><div id="newsErrorNone"></div><button id="newsErrorRetry"></button></div></div>
+        <div id="newsButtonAlert"></div>
+        <a id="newsArticleTitle"></a><span id="newsArticleDate"></span><span id="newsArticleAuthor"></span><a id="newsArticleComments"></a>
+        <div id="newsArticleContentScrollable"></div><button id="newsNavigateLeft"></button><button id="newsNavigateRight"></button><span id="newsNavigationStatus"></span>
+    </div>
+    <script src="./assets/js/scripts/landing.js"></script>
+</div>
