@@ -98,9 +98,9 @@ npm run dist:win
 `package.json`과 `package-lock.json`의 버전을 변경하고 커밋한 뒤 같은 버전의 태그를 올립니다.
 
 ```powershell
-git tag -a v0.1.8 -m "AVALON Launcher v0.1.8"
+git tag -a v0.1.9 -m "AVALON Launcher v0.1.9"
 git push origin main
-git push origin v0.1.8
+git push origin v0.1.9
 ```
 
 GitHub Actions가 설치 파일을 만들고 태그에 해당하는 릴리스에 등록합니다.

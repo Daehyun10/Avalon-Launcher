@@ -98,9 +98,9 @@ Build files are written to `dist/`.
 Update the version in `package.json` and `package-lock.json`, commit the change, and push a matching tag.
 
 ```powershell
-git tag -a v0.1.8 -m "AVALON Launcher v0.1.8"
+git tag -a v0.1.9 -m "AVALON Launcher v0.1.9"
 git push origin main
-git push origin v0.1.8
+git push origin v0.1.9
 ```
 
 GitHub Actions builds the installer and adds it to the release created for the tag.
