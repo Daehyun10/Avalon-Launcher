@@ -14,16 +14,17 @@ extraResources:
   - 'libraries'
 
 # Windows Configuration
-win: 
-  # Development build: avoids Windows symlink-dependent signing tool extraction.
-  # Re-enable when a production signing certificate and CI environment exist.
-  signAndEditExecutable: false
+win:
+  icon: 'build/icon.ico'
+  signAndEditExecutable: true
   target: 
     - target: 'nsis'
       arch: 'x64'
 
 # Windows Installer Configuration
 nsis:
+  installerIcon: 'build/icon.ico'
+  uninstallerIcon: 'build/icon.ico'
   oneClick: false
   perMachine: false
   allowElevation: true
