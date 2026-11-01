@@ -74,6 +74,16 @@
                 <span class="settingsTabHeaderText"><%- lang('settings.minecraftTabHeaderText') %></span>
                 <span class="settingsTabHeaderDesc"><%- lang('settings.minecraftTabHeaderDesc') %></span>
             </div>
+            <div id="settingsServerAddressContainer">
+                <label class="settingsFieldTitle" for="settingsServerAddress"><%- lang('settings.serverAddressTitle') %></label>
+                <p id="settingsServerAddressProfile" class="settingsFieldDesc"></p>
+                <div class="settingsServerAddressActions">
+                    <input id="settingsServerAddress" type="text" cValue="ServerAddress" serverDependent maxlength="260" autocomplete="off" spellcheck="false" placeholder="play.example.com:25565" aria-describedby="settingsServerAddressHint settingsServerAddressError">
+                    <button id="settingsServerAddressReset" type="button"><%- lang('settings.serverAddressReset') %></button>
+                </div>
+                <p id="settingsServerAddressHint" class="settingsFieldDesc"><%- lang('settings.serverAddressHint') %></p>
+                <p id="settingsServerAddressError" role="alert" hidden><%- lang('settings.serverAddressError') %></p>
+            </div>
             <div id="settingsGameResolutionContainer">
                 <span class="settingsFieldTitle"><%- lang('settings.gameResolutionTitle') %></span>
                 <div id="settingsGameResolutionContent">

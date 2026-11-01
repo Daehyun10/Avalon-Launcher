@@ -9,6 +9,7 @@ const os                    = require('os')
 const path                  = require('path')
 
 const ConfigManager            = require('./configmanager')
+const ServerAddress            = require('./serveraddress')
 
 const logger = LoggerUtil.getLogger('ProcessBuilder')
 
@@ -27,6 +28,7 @@ class ProcessBuilder {
         this.gameDir = path.join(ConfigManager.getInstanceDirectory(), distroServer.rawServer.id)
         this.commonDir = ConfigManager.getCommonDirectory()
         this.server = distroServer
+        this.connection = ServerAddress.resolve(distroServer, ConfigManager.getServerAddress(distroServer.rawServer.id))
         this.vanillaManifest = vanillaManifest
         this.modManifest = modManifest
         this.authUser = authUser
@@ -326,15 +328,15 @@ class ProcessBuilder {
     }
 
     _processAutoConnectArg(args){
-        if(ConfigManager.getAutoConnect() && this.server.rawServer.autoconnect){
+        if(ConfigManager.getAutoConnect() && this.connection.autoconnect){
             if(mcVersionAtLeast('1.20', this.server.rawServer.minecraftVersion)){
                 args.push('--quickPlayMultiplayer')
-                args.push(`${this.server.hostname}:${this.server.port}`)
+                args.push(this.connection.address)
             } else {
                 args.push('--server')
-                args.push(this.server.hostname)
+                args.push(this.connection.hostname)
                 args.push('--port')
-                args.push(this.server.port)
+                args.push(this.connection.port)
             }
         }
     }

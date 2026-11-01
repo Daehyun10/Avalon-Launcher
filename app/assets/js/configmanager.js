@@ -2,6 +2,7 @@ const fs   = require('fs-extra')
 const { LoggerUtil } = require('helios-core')
 const os   = require('os')
 const path = require('path')
+const ServerAddress = require('./serveraddress')
 
 const logger = LoggerUtil.getLogger('ConfigManager')
 
@@ -99,7 +100,8 @@ const DEFAULT_CONFIG = {
     selectedAccount: null,
     authenticationDatabase: {},
     modConfigurations: [],
-    javaConfig: {}
+    javaConfig: {},
+    serverAddresses: {}
 }
 
 let config = null
@@ -750,6 +752,27 @@ exports.getAutoConnect = function(def = false){
  */
 exports.setAutoConnect = function(autoConnect){
     config.settings.game.autoConnect = autoConnect
+}
+
+exports.getServerAddress = function(serverId){
+    const entries = config.serverAddresses || {}
+    const value = Object.prototype.hasOwnProperty.call(entries, serverId) ? entries[serverId] : ''
+    return typeof value === 'string' && ServerAddress.isValid(value) ? value : ''
+}
+
+exports.validateServerAddress = ServerAddress.isValid
+
+exports.setServerAddress = function(serverId, value){
+    if(typeof serverId !== 'string' || !serverId) throw new Error('Select a profile before setting its server address.')
+    const parsed = ServerAddress.parseAddress(value)
+    if(config.serverAddresses == null || typeof config.serverAddresses !== 'object' || Array.isArray(config.serverAddresses)) config.serverAddresses = {}
+    if(parsed == null) {
+        delete config.serverAddresses[serverId]
+    } else {
+        Object.defineProperty(config.serverAddresses, serverId, {
+            value: parsed.address, enumerable: true, configurable: true, writable: true
+        })
+    }
 }
 
 /**

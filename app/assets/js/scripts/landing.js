@@ -31,6 +31,7 @@ const {
 const DiscordWrapper          = require('./assets/js/discordwrapper')
 const ProcessBuilder          = require('./assets/js/processbuilder')
 const GameSession             = require('./assets/js/gamesession')
+const ServerAddress           = require('./assets/js/serveraddress')
 
 // Launch Elements
 const launch_content          = document.getElementById('launch_content')
@@ -290,7 +291,8 @@ const refreshServerStatus = async (fade = false) => {
 
     try {
 
-        const servStat = await getServerStatus(47, serv.hostname, serv.port)
+        const connection = ServerAddress.resolve(serv, ConfigManager.getServerAddress(serv.rawServer.id))
+        const servStat = await getServerStatus(47, connection.hostname, connection.port)
         pLabel = 'ONLINE'
         pVal = servStat.players.online + '/' + servStat.players.max
 

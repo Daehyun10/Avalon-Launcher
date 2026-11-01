@@ -2,6 +2,7 @@
 const os     = require('os')
 const semver = require('semver')
 const SETTINGS_BRAND = require('./assets/js/brand')
+const SETTINGS_SERVER_ADDRESS = require('./assets/js/serveraddress')
 
 const DropinModUtil  = require('./assets/js/dropinmodutil')
 const { MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR } = require('./assets/js/ipcconstants')
@@ -97,7 +98,7 @@ function initSettingsValidators(){
         if(typeof vFn === 'function'){
             if(v.tagName === 'INPUT'){
                 if(v.type === 'number' || v.type === 'text'){
-                    v.addEventListener('keyup', (e) => {
+                    v.addEventListener('input', (e) => {
                         const v = e.target
                         if(!vFn(v.value)){
                             settingsState.invalid.add(v.id)
@@ -323,6 +324,7 @@ function settingsSaveDisabled(v){
 }
 
 function fullSettingsSave() {
+    if(settingsState.invalid.size > 0) return
     saveSettingsValues()
     saveModConfiguration()
     ConfigManager.save()
@@ -332,8 +334,31 @@ function fullSettingsSave() {
 
 /* Closes the settings view and saves all data. */
 settingsNavDone.onclick = () => {
+    if(settingsState.invalid.size > 0) return
     fullSettingsSave()
     switchView(getCurrentView(), VIEWS.landing)
+    refreshServerStatus()
+}
+
+const settingsServerAddress = document.getElementById('settingsServerAddress')
+settingsServerAddress.addEventListener('input', () => {
+    const valid = SETTINGS_SERVER_ADDRESS.isValid(settingsServerAddress.value)
+    document.getElementById('settingsServerAddressError').hidden = valid
+    settingsServerAddress.setAttribute('aria-invalid', String(!valid))
+})
+document.getElementById('settingsServerAddressReset').onclick = () => {
+    settingsServerAddress.value = ''
+    settingsServerAddress.dispatchEvent(new Event('input', { bubbles: true }))
+}
+
+async function prepareServerAddressSettings() {
+    const distro = await DistroAPI.getDistribution()
+    const server = distro.getServerById(ConfigManager.getSelectedServer())
+    if(server == null) return
+    const defaultAddress = SETTINGS_SERVER_ADDRESS.resolve(server).address
+    settingsServerAddress.placeholder = defaultAddress
+    document.getElementById('settingsServerAddressProfile').textContent = `${server.rawServer.name} · Minecraft ${server.rawServer.minecraftVersion} · Default: ${defaultAddress}`
+    settingsServerAddress.dispatchEvent(new Event('input', { bubbles: true }))
 }
 
 /**
@@ -1577,6 +1602,7 @@ async function prepareSettings(first = false) {
         await prepareModsTab()
     }
     await initSettingsValues()
+    await prepareServerAddressSettings()
     prepareAccountsTab()
     await prepareJavaTab()
     prepareAboutTab()

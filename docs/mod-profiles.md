@@ -14,6 +14,12 @@ Enhance System is optional and enabled by default. Turn it on or off in Settings
 
 Launcher executable updates continue to use this repository's GitHub Releases. Mod updates use the catalog repository and do not require another launcher release.
 
+## Custom server address
+
+Open Settings > Minecraft > Server Address. Enter a domain or IP address with an optional port, such as `play.example.com:25565` or `[::1]:25565`, then select Done. This override is saved locally for the selected profile and survives catalog updates. Both the status indicator and game auto-connect use it. Enable Auto Connect to join on launch. Use default (or leave the field blank) to follow the address published in the catalog again.
+
+This setting changes the connection target on this computer. To change the default for every player, publish the profile's `address` in the avalon-mods catalog and its `servermeta.json`. Changing the target does not change Minecraft or mod compatibility.
+
 ## 한국어
 
 시작 문구 아래 프로필 이름을 누르면 등록된 모드팩과 Minecraft 버전을 선택할 수 있습니다. 현재 제공되는 프로필은 AVALON 1.18.2 / Forge 40.2.0입니다. 추가 버전은 avalon-mods 저장소에 호환되는 실행 프로필을 등록하면 나타납니다.

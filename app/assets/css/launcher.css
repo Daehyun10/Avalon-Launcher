@@ -5285,6 +5285,59 @@ body.avalon-opening #frameBar {
     line-height: 16px;
 }
 
+#settingsServerAddressContainer {
+    margin-bottom: 24px;
+}
+
+#settingsServerAddressContainer p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.settingsServerAddressActions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-block: 12px;
+}
+
+#settingsServerAddress {
+    flex: 1 1 230px;
+    min-width: 0;
+    padding: 9px 12px;
+    color: var(--avalon-ivory);
+    background: rgba(4, 4, 4, .55);
+    border: 1px solid rgba(185, 149, 80, .44);
+    border-radius: 1px;
+    font: inherit;
+}
+
+#settingsServerAddress:focus-visible,
+#settingsServerAddressReset:focus-visible {
+    outline: 1px solid var(--avalon-gold);
+    outline-offset: 2px;
+}
+
+#settingsServerAddress[aria-invalid="true"] {
+    border-color: #bd796c;
+}
+
+#settingsServerAddressError {
+    color: #d99c8f;
+    font-size: 12px;
+}
+
+#settingsServerAddressReset {
+    padding: 8px 12px;
+    color: var(--avalon-ivory);
+    background: rgba(28, 23, 17, .72);
+    border: 1px solid rgba(185, 149, 80, .44);
+    cursor: pointer;
+    font: inherit;
+    -webkit-app-region: no-drag;
+}
+
 .toggleSwitch {
     width: 38px;
     height: 20px;
