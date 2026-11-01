@@ -701,7 +701,7 @@ async function prepareGameLaunch(login = true) {
 
             // Init Discord Hook
             if(distro.rawDistribution.discord != null && serv.rawServer.discord != null){
-                hasRPC = DiscordWrapper.initRPC(distro.rawDistribution.discord, serv.rawServer.discord)
+                hasRPC = DiscordWrapper.initRPC(distro.rawDistribution.discord, serv.rawServer.discord, undefined, proc.pid)
             }
 
         } catch(err) {

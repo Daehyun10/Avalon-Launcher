@@ -1,4 +1,3 @@
-// Work in progress
 const { LoggerUtil } = require('helios-core')
 
 const logger = LoggerUtil.getLogger('DiscordWrapper')
@@ -7,17 +6,25 @@ const { Client } = require('discord-rpc-patch')
 
 const Lang = require('./langloader')
 
-let client
-let activity
+let session = null
 
-exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.queryJS('discord.waiting')){
+function logFailure(error) {
+    logger.info('Discord Rich Presence unavailable: ' + error.message)
+}
+
+function publish(current) {
+    if(session !== current || !current.ready) return
+    return current.client.setActivity({ ...current.activity }, current.pid).catch(logFailure)
+}
+
+exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.queryJS('discord.waiting'), processId = process.pid){
+    exports.shutdownRPC()
     if(!genSettings?.clientId || !servSettings) {
         logger.info('Discord RPC disabled: no AVALON client configuration.')
         return false
     }
-    client = new Client({ transport: 'ipc' })
-
-    activity = {
+    const client = new Client({ transport: 'ipc' })
+    const activity = {
         details: initialDetails,
         state: Lang.queryJS('discord.state', {shortId: servSettings.shortId}),
         largeImageKey: servSettings.largeImageKey,
@@ -27,32 +34,44 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.quer
         startTimestamp: new Date().getTime(),
         instance: false
     }
+    const current = { client, activity, pid: processId, ready: false }
+    session = current
 
     client.on('ready', () => {
+        if(session !== current) return
+        current.ready = true
         logger.info('Discord RPC Connected')
-        client.setActivity(activity)
+        publish(current)
     })
-    
-    client.login({clientId: genSettings.clientId}).catch(error => {
-        if(error.message.includes('ENOENT')) {
-            logger.info('Unable to initialize Discord Rich Presence, no client detected.')
-        } else {
-            logger.info('Unable to initialize Discord Rich Presence: ' + error.message, error)
-        }
+    client.on('error', logFailure)
+    client.on('disconnected', () => {
+        current.ready = false
     })
+    client.login({clientId: genSettings.clientId}).catch(logFailure)
     return true
 }
 
 exports.updateDetails = function(details){
-    if(!activity || !client) return
-    activity.details = details
-    client.setActivity(activity)
+    if(session == null) return
+    session.activity.details = details
+    return publish(session)
 }
 
 exports.shutdownRPC = function(){
-    if(!client) return
-    client.clearActivity()
-    client.destroy()
-    client = null
-    activity = null
+    if(session == null) return
+    const current = session
+    session = null
+    return (async () => {
+        try {
+            if(current.ready) await current.client.clearActivity(current.pid)
+        } catch(error) {
+            logFailure(error)
+        } finally {
+            try {
+                await current.client.destroy()
+            } catch(error) {
+                logFailure(error)
+            }
+        }
+    })()
 }

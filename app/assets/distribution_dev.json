@@ -1,5 +1,10 @@
 {
   "version": "1.0.0",
+  "discord": {
+    "clientId": "1566335017280471060",
+    "smallImageKey": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/branding/src/main/resources/assets/avalonbranding/window-icon.jpg",
+    "smallImageText": "AVALON"
+  },
   "servers": [
     {
       "id": "AVALON-Development-1.18.2",
@@ -11,6 +16,11 @@
       "minecraftVersion": "1.18.2",
       "mainServer": true,
       "autoconnect": true,
+      "discord": {
+        "shortId": "AVALON",
+        "largeImageKey": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/branding/src/main/resources/assets/avalonbranding/window-icon.jpg",
+        "largeImageText": "AVALON"
+      },
       "javaOptions": {
         "distribution": "TEMURIN",
         "supported": ">=17 <22",
