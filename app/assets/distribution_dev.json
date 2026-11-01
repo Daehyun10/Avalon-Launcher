@@ -401,7 +401,7 @@
           ]
         },
         {
-          "id": "com.avalon:avalon-branding:1.0.0@jar",
+          "id": "com.avalon:avalon-branding:1.0.1@jar",
           "name": "AVALON Client",
           "type": "ForgeMod",
           "required": {
@@ -409,9 +409,9 @@
             "def": true
           },
           "artifact": {
-            "size": 48608,
-            "url": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/servers/AVALON-Development-1.18.2/forgemods/required/avalon-branding-1.0.0.jar",
-            "MD5": "907eac80e093829f343f27c92abd8bf6"
+            "size": 48811,
+            "url": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/servers/AVALON-Development-1.18.2/forgemods/required/avalon-branding-1.0.1.jar",
+            "MD5": "f3b23e0955d9236e1f2c4e370159635b"
           }
         },
         {
