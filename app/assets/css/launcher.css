@@ -5271,6 +5271,20 @@ body.avalon-opening #frameBar {
     box-shadow: none !important;
 }
 
+#settingsAboutDevToolsButton {
+    display: inline-flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    min-height: 24px;
+    height: 24px;
+    padding: 3px 8px;
+    font-size: 10px;
+    line-height: 16px;
+}
+
 .toggleSwitch {
     width: 38px;
     height: 20px;

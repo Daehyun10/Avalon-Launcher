@@ -394,9 +394,13 @@
           "id": "com.enhance.mod:enhancemod:1.0.0@jar",
           "name": "Enhance System",
           "type": "ForgeMod",
+          "required": {
+            "value": false,
+            "def": true
+          },
           "artifact": {
             "size": 6104187,
-            "url": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/servers/AVALON-Development-1.18.2/forgemods/required/enhancemod-1.0.jar",
+            "url": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/servers/AVALON-Development-1.18.2/forgemods/optionalon/enhancemod-1.0.jar",
             "MD5": "ea398faf9fc573b56af66c44757f1921"
           }
         }
