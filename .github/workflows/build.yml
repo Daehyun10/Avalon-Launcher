@@ -33,7 +33,7 @@ jobs:
       - name: Check launcher code and game lifecycle
         run: |
           npm run lint
-          node --test test/gamesession.test.js test/discordwrapper.test.js test/serveraddress.test.js
+          node --test test/gamesession.test.js test/discordwrapper.test.js test/serveraddress.test.js test/modupdatechecker.test.js
 
       - name: Build and publish Windows release
         env:

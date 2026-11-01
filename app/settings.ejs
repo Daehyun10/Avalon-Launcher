@@ -143,6 +143,15 @@
                 </div>
             </div>
             <div id="settingsModsContainer">
+                <div id="settingsModUpdates">
+                    <div class="settingsModUpdateHeader">
+                        <span class="settingsModsHeader"><%- lang('settings.modUpdatesTitle') %></span>
+                        <button id="settingsModUpdateCheck" type="button"><%- lang('settings.modUpdatesCheck') %></button>
+                    </div>
+                    <p id="settingsModUpdateSummary" role="status" aria-live="polite"><%- lang('settings.modUpdatesPending') %></p>
+                    <ul id="settingsModUpdateList"></ul>
+                    <p class="settingsFieldDesc"><%- lang('settings.modUpdatesHint') %></p>
+                </div>
                 <div id="settingsReqModsContainer">
                     <div class="settingsModsHeader"><%- lang('settings.requiredMods') %></div>
                     <div id="settingsReqModsContent">

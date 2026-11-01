@@ -3,6 +3,8 @@ const os     = require('os')
 const semver = require('semver')
 const SETTINGS_BRAND = require('./assets/js/brand')
 const SETTINGS_SERVER_ADDRESS = require('./assets/js/serveraddress')
+const ModUpdateChecker = require('./assets/js/modupdatechecker')
+const loggerModUpdates = LoggerUtil.getLogger('ModUpdates')
 
 const DropinModUtil  = require('./assets/js/dropinmodutil')
 const { MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR } = require('./assets/js/ipcconstants')
@@ -729,6 +731,65 @@ document.getElementById('settingsGameHeight').addEventListener('keydown', (e) =>
 
 const settingsModsContainer = document.getElementById('settingsModsContainer')
 
+let modUpdateCheckId = 0
+const MOD_UPDATE_LABELS = {
+    current: 'Up to date', outdated: 'Update required', missing: 'Not installed',
+    unreadable: 'Unable to read file', unverified: 'Cannot verify'
+}
+
+async function checkModUpdates() {
+    const requestId = ++modUpdateCheckId
+    const serverId = ConfigManager.getSelectedServer()
+    const button = document.getElementById('settingsModUpdateCheck')
+    const summary = document.getElementById('settingsModUpdateSummary')
+    const list = document.getElementById('settingsModUpdateList')
+    button.disabled = true
+    button.setAttribute('aria-busy', 'true')
+    summary.textContent = 'Checking the latest mod catalog...'
+    list.replaceChildren()
+    try {
+        if(DistroAPI.isDevMode()) throw new Error('Development catalog is not a published update source.')
+        const result = await ModUpdateChecker.check({
+            remoteUrl: SETTINGS_BRAND.remoteDistributionUrl,
+            serverId,
+            commonDir: ConfigManager.getCommonDirectory(),
+            instanceDir: ConfigManager.getInstanceDirectory()
+        })
+        if(requestId !== modUpdateCheckId || serverId !== ConfigManager.getSelectedServer()) return
+        for(const mod of result.mods) {
+            const row = document.createElement('li')
+            const name = document.createElement('span')
+            const status = document.createElement('span')
+            name.textContent = `${mod.name} · Latest v${mod.version}`
+            status.textContent = MOD_UPDATE_LABELS[mod.status]
+            status.className = 'settingsModUpdateState'
+            status.dataset.state = mod.status
+            row.append(name, status)
+            list.append(row)
+        }
+        const changes = result.mods.filter(mod => mod.status === 'outdated' || mod.status === 'missing').length
+        const unverified = result.mods.some(mod => mod.status === 'unverified' || mod.status === 'unreadable')
+        const message = result.mods.length === 0 ? 'No distributed mods in this profile.'
+            : changes > 0 ? `${changes} ${changes === 1 ? 'mod needs' : 'mods need'} an update or download. Changes apply at the next game launch.`
+                : unverified ? 'Some installed mods could not be verified.' : 'All distributed mods are up to date.'
+        summary.textContent = `${message} Checked ${result.checkedAt.toLocaleTimeString()}.`
+    } catch(error) {
+        if(requestId !== modUpdateCheckId || serverId !== ConfigManager.getSelectedServer()) return
+        loggerModUpdates.warn('Unable to check the latest mod catalog.', error)
+        summary.textContent = error.code === 'PROFILE_MISSING'
+            ? 'This profile is no longer published. Choose another profile and try again.'
+            : DistroAPI.isDevMode() ? 'Update checks require a published mod catalog.'
+                : 'Unable to check for updates. Check your connection and try again.'
+    } finally {
+        if(requestId === modUpdateCheckId) {
+            button.disabled = false
+            button.removeAttribute('aria-busy')
+        }
+    }
+}
+
+document.getElementById('settingsModUpdateCheck').onclick = checkModUpdates
+
 /**
  * Resolve and update the mods on the UI.
  */
@@ -1160,6 +1221,7 @@ async function prepareModsTab(first){
     bindShaderpackButton()
     bindModsToggleSwitch()
     await loadSelectedServerOnModsTab()
+    checkModUpdates()
 }
 
 /**

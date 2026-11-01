@@ -5338,6 +5338,44 @@ body.avalon-opening #frameBar {
     -webkit-app-region: no-drag;
 }
 
+#settingsModUpdates {
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(185, 149, 80, .2);
+}
+
+.settingsModUpdateHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.settingsModUpdateHeader .settingsModsHeader {
+    border: 0;
+    margin: 0;
+}
+
+#settingsModUpdateCheck {
+    padding: 7px 11px;
+    color: var(--avalon-ivory);
+    background: rgba(28, 23, 17, .72);
+    border: 1px solid rgba(185, 149, 80, .44);
+    font: inherit;
+    cursor: pointer;
+}
+
+#settingsModUpdateCheck:disabled { opacity: .55; cursor: wait; }
+#settingsModUpdateCheck:focus-visible { outline: 1px solid var(--avalon-gold); outline-offset: 2px; }
+#settingsModUpdateSummary { color: var(--avalon-ivory); font-size: 12px; line-height: 1.6; }
+#settingsModUpdateList { list-style: none; margin: 12px 0; padding: 0; }
+#settingsModUpdateList li { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; padding: 7px 0; font-size: 12px; }
+.settingsModUpdateState { color: var(--avalon-muted); }
+.settingsModUpdateState[data-state="current"] { color: #a9b68b; }
+.settingsModUpdateState[data-state="outdated"],
+.settingsModUpdateState[data-state="missing"] { color: var(--avalon-gold); }
+
 .toggleSwitch {
     width: 38px;
     height: 20px;
