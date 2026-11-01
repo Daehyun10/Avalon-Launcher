@@ -413,9 +413,9 @@
             "def": true
           },
           "artifact": {
-            "size": 6104187,
+            "size": 6086107,
             "url": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/servers/AVALON-Development-1.18.2/forgemods/optionalon/enhancemod-1.0.jar",
-            "MD5": "ea398faf9fc573b56af66c44757f1921"
+            "MD5": "59a59511674117f12eea4a615583e90e"
           }
         }
       ]
