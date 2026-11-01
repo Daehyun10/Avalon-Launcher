@@ -13,7 +13,7 @@ module.exports = Object.freeze({
     website: process.env.AVALON_WEBSITE_URL || '',
     discord: process.env.AVALON_DISCORD_URL || '',
     support: process.env.AVALON_SUPPORT_URL || '',
-    remoteDistributionUrl: process.env.AVALON_DISTRIBUTION_URL || '',
+    remoteDistributionUrl: process.env.AVALON_DISTRIBUTION_URL || 'https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/distribution.json',
     discordClientId: process.env.AVALON_DISCORD_CLIENT_ID || '',
     updateRepository: process.env.AVALON_UPDATE_REPOSITORY || 'https://github.com/Daehyun10/Avalon-Launcher',
     autoUpdateEnabled: process.env.AVALON_AUTO_UPDATE !== 'false'

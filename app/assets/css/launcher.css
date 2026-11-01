@@ -4779,9 +4779,24 @@ body {
 }
 
 #landingContainer.avalon-fantasy #launch_button:disabled:hover::before,
-#landingContainer.avalon-fantasy #launch_button:disabled:hover::after,
-#landingContainer.avalon-fantasy #server_selection_button {
+#landingContainer.avalon-fantasy #launch_button:disabled:hover::after {
     display: none;
+}
+
+#landingContainer.avalon-fantasy #server_selection_button {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 7px 10px;
+    font-size: 12px;
+    -webkit-app-region: no-drag;
+}
+
+#landingContainer.avalon-fantasy #server_selection_button:hover,
+#landingContainer.avalon-fantasy #server_selection_button:focus-visible {
+    color: var(--avalon-ivory);
+    text-shadow: none;
+    outline: 1px solid var(--avalon-gold);
+    outline-offset: 2px;
 }
 
 #landingContainer.avalon-fantasy #launch_details {

@@ -24,14 +24,19 @@ ConfigManager.load()
 DistroAPI['commonDir'] = ConfigManager.getCommonDirectory()
 DistroAPI['instanceDir'] = ConfigManager.getInstanceDirectory()
 
-// A local distribution keeps development usable until AVALON hosting exists.
+// Keep a packaged distribution available for first launch and offline fallback.
+const bundledDistro = path.join(__dirname, '..', 'distribution_dev.json')
 if(!BRAND.remoteDistributionUrl) {
     const localDistro = path.join(ConfigManager.getLauncherDirectory(), 'distribution_dev.json')
-    if(!fs.existsSync(localDistro)) {
-        fs.copyFileSync(path.join(__dirname, '..', 'distribution_dev.json'), localDistro)
-    }
+    fs.copyFileSync(bundledDistro, localDistro)
     DistroAPI.toggleDevMode(true)
     logger.info('[Distribution] AVALON Development distribution selected.')
+} else {
+    const cachedDistro = path.join(ConfigManager.getLauncherDirectory(), 'distribution.json')
+    if(!fs.existsSync(cachedDistro)) {
+        fs.copyFileSync(bundledDistro, cachedDistro)
+        logger.info('[Distribution] Packaged AVALON distribution installed as fallback.')
+    }
 }
 
 // Load Strings
