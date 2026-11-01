@@ -391,6 +391,20 @@
           ]
         },
         {
+          "id": "com.avalon:avalon-branding:1.0.0@jar",
+          "name": "AVALON Client",
+          "type": "ForgeMod",
+          "required": {
+            "value": true,
+            "def": true
+          },
+          "artifact": {
+            "size": 48608,
+            "url": "https://raw.githubusercontent.com/Daehyun10/avalon-mods/main/servers/AVALON-Development-1.18.2/forgemods/required/avalon-branding-1.0.0.jar",
+            "MD5": "907eac80e093829f343f27c92abd8bf6"
+          }
+        },
+        {
           "id": "com.enhance.mod:enhancemod:1.0.0@jar",
           "name": "Enhance System",
           "type": "ForgeMod",
