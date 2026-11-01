@@ -370,8 +370,19 @@ function getPlatformIcon(filename){
     return path.join(__dirname, 'app', 'assets', 'images', `${filename}.${ext}`)
 }
 
-app.on('ready', createWindow)
-app.on('ready', createMenu)
+if(app.requestSingleInstanceLock()) {
+    app.on('ready', createWindow)
+    app.on('ready', createMenu)
+    app.on('second-instance', () => {
+        // A hidden launcher stays hidden until its Minecraft process exits.
+        if(win != null && !win.isDestroyed() && win.isVisible()) {
+            if(win.isMinimized()) win.restore()
+            win.focus()
+        }
+    })
+} else {
+    app.quit()
+}
 
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
